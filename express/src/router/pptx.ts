@@ -19,6 +19,7 @@ import {
 
 import {
   getPPTXContent,
+  getTemplates,
   getPPTXTemplate,
   setTitle,
   setTheme,

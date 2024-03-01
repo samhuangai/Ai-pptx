@@ -33,7 +33,7 @@ export async function getTemplates() {
   const records: any = await (getDbRecord as SqliteQueryFunction)(
     "SELECT * FROM templates"
   );
-  const templatesData = records.map((record) =>
+  const templatesData = records.map((record: any) =>
     record && record.template ? JSON.parse(record.template) : {}
   );
   return templatesData;
