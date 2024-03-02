@@ -8,6 +8,7 @@
     >
       <ThumbnailSlide class="thumbnail" :slide="slide" :size="180" />
     </div>
+    <pre>{{ JSON.stringify(localMobanLayouts) }}</pre>
   </div>
 </template>
 
@@ -33,7 +34,7 @@ const emit = defineEmits<{
 const selectSlideTemplate = (index: number) => {
   const selectedTemplate = localMobanLayouts.value[index]
   if (selectedTemplate) {
-    emit('select', [selectedTemplate])
+    emit('select', [].concat(selectedTemplate))
   }
 }
 </script>

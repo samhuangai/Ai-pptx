@@ -5,6 +5,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import useragent from "useragent";
+import fs from "fs";
+import path from 'path';
+import { DataDir } from "./const";
 
 dotenv.config();
 
@@ -30,13 +33,16 @@ export async function getPPTXContent(id: number) {
 }
 
 export async function getTemplates() {
-  const records: any = await (getDbRecord as SqliteQueryFunction)(
-    "SELECT * FROM templates"
-  );
-  const templatesData = records.map((record: any) =>
-    record && record.template ? JSON.parse(record.template) : {}
-  );
-  return templatesData;
+  const filePath = path.join(DataDir + "/ppttemplate/moban1.json");
+  console.log("filePath", filePath);
+  try {
+    const data = await fs.promises.readFile(filePath, 'utf8');
+    const templates = JSON.parse(data);
+    return templates;
+  } catch (error) {
+    console.error('Error reading template file:', error);
+    throw error; 
+  }
 }
 
 export async function setTitle(Data: any) {
